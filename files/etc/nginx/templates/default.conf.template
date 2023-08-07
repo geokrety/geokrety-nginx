@@ -51,7 +51,7 @@ server {
     server_name ${GK_SITE_BASE_SERVER_FQDN};
 
     root /var/www/html;
-    index index.php;
+    index geokrety.php;
 
     access_log /dev/stdout timed_combined;
     error_log  /dev/stderr;
@@ -93,7 +93,7 @@ server {
         internal;
     }
 
-    location = /index.php {
+    location = /geokrety.php {
         internal;
         include fastcgi_pass;
     }
@@ -109,7 +109,7 @@ server {
 
     location / {
         limit_req zone=req_limit_standard burst=10 delay=5;
-        rewrite ^ /index.php?$query_string last;
+        rewrite ^ /geokrety.php?$query_string last;
     }
 
     location /app-ui/ {
@@ -121,58 +121,59 @@ server {
     }
 
     location /gkt/ {
+        try_files $uri =404;
     }
 
     # Refer to https://stackoverflow.com/a/28439695/944936
     # regarding the hack with "FOOBAR"
     location ~ ^/gkt/(search|inventory)_v3\.php$ {
         limit_req zone=req_limit_gkt burst=5 delay=2;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location ~ ^/gkt/v3/(search|inventory)$ {
         limit_req zone=req_limit_gkt burst=5 delay=2;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location ~ ^/[^/]*/validate/ {
         limit_req zone=req_limit_validates burst=7 nodelay;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location ~ ^/[^/]*(/login|/registration|/password-recovery|/geokrety/claim) {
         limit_req zone=req_limit_auth burst=5 delay=1;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location ~ ^/api/v1/login/secid {
         limit_req zone=req_limit_auth burst=5 delay=1;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location ~ /geojson$ {
         limit_req zone=req_limit_geojson burst=5 delay=2;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location = /user/refresh-secid {
         limit_req zone=req_limit_heavy_load burst=5 delay=2;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location = /api/v1/export2 {
         limit_req zone=req_limit_api_export2 burst=5 delay=2;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location ~ ^/api/v1/(export|export_oc)$ {
         limit_req zone=req_limit_api_export burst=5 delay=2;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 
     location /search/ {
         limit_req zone=req_limit_search burst=5 delay=2;
-        try_files FOOBAR /index.php?$query_string;
+        try_files FOOBAR /geokrety.php?$query_string;
     }
 }
 
