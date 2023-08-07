@@ -39,13 +39,13 @@ jobs:
             }
 
           repository: geokrety/geokrety-ansible
-          targetBranch: main
+          targetBranch: master
+          # masterBranchName: main
 
           token: ${{ secrets.GH_TOKEN }}
           workDir: versionset
 
           createPR: true
-          # masterBranchName: main
           branch: deployment/${{ github.repository }}/${{ github.ref_name }}
           commitUserName: geokrety-bot
           commitUserEmail: geokrety-bot@users.noreply.github.com
