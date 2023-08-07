@@ -50,4 +50,4 @@ jobs:
           commitUserName: geokrety-bot
           commitUserEmail: geokrety-bot@users.noreply.github.com
           message: |
-            feat: Bump ${{ github.repository }} in version-set
+            feat: Bump ${{ github.repository }} in version-set to ${{ github.ref_name }}
