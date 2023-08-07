@@ -46,8 +46,8 @@ jobs:
           workDir: versionset
 
           createPR: true
-          branch: deployment/${{ github.repository }}/${{ github.ref_name }}
+          branch: deployment/${{ github.repository }}
           commitUserName: geokrety-bot
           commitUserEmail: geokrety-bot@users.noreply.github.com
           message: |
-            feat: Update ${{ github.repository }} version to ${{ github.ref_name }}
+            feat: Bump ${{ github.repository }} in version-set
