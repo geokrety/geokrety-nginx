@@ -22,6 +22,6 @@ jobs:
 
   update-version-set:
     uses: geokrety/geokrety-gha-workflows/.github/workflows/version-set.yml@main
-    needs: build-release
+    needs: docker
     secrets:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
