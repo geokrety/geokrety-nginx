@@ -1,3 +1,4 @@
+
 name: Automatic release
 
 on:
@@ -6,7 +7,26 @@ on:
       - main
 
 jobs:
-  build-release:
-    uses: geokrety/geokrety-gha-workflows/.github/workflows/release.yml@main
-    secrets:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+  pre-commit:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/pre-commit@main
+
+  docker:
+    needs: pre-commit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/docker-build@main
+        with:
+          image_name: geokrety/nginx
+          dockerhub_username: ${{ vars.DOCKERHUB_USERNAME }}
+          dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  semantic-release:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/semantic-release@main
+        with:
+          token: ${{ secrets.GH_TOKEN }}
