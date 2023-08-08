@@ -12,7 +12,7 @@ on:
 
 jobs:
   docker:
-    uses: geokrety/geokrety-gha-workflows/.github/workflows/docker-build@main
+    uses: geokrety/geokrety-gha-workflows/.github/workflows/docker-build.yml@main
     with:
       image_name: geokrety/nginx
       dockerhub_username: ${{ vars.DOCKERHUB_USERNAME }}
