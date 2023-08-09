@@ -28,5 +28,8 @@ jobs:
 
   deploy:
     needs: docker
-    run: |
-      curl -v -X POST -H "${{ secrets.DEPLOY_HEADER_NAME }}: ${{ secrets.DEPLOY_HEADER_VALUE }}" ${{ secrets.DEPLOY_URL }} -H "Content-Type: application/json" -d null
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+    steps:
+      run: |
+        curl -v -X POST -H "${{ secrets.DEPLOY_HEADER_NAME }}: ${{ secrets.DEPLOY_HEADER_VALUE }}" ${{ secrets.DEPLOY_URL }} -H "Content-Type: application/json" -d null
