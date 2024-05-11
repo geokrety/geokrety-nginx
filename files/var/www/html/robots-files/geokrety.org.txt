@@ -18,8 +18,8 @@ Disallow: /szukaj.php
 Disallow: /ruchy.php
 Disallow: /gk_stat.php
 Disallow: /go2geo/
-Disallow: /*/geokrety/*/geojson
-Disallow: /*/login/
+Disallow: /*/geojson
+Disallow: /*/login
 
 User-agent: Amazonbot
 Disallow: /
