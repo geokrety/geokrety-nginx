@@ -20,7 +20,6 @@ Disallow: /gk_stat.php
 Disallow: /go2geo/
 Disallow: /*/geokrety/*/geojson
 Disallow: /*/login/
-Sitemap: /assets/compressed/sitemap.txt
 
 User-agent: Amazonbot
 Disallow: /
