@@ -205,6 +205,7 @@ server {
         allow all;
         log_not_found off;
         access_log off;
+        default_type text/html;
         return 200 "";
     }
 
