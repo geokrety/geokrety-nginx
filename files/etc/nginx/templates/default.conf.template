@@ -206,7 +206,7 @@ server {
         log_not_found off;
         access_log off;
         default_type text/html;
-        return 200 "";
+        return 200 "GeoKrety.org API";
     }
 
     location = /robots.txt {
