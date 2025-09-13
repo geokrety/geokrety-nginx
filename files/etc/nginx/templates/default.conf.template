@@ -89,8 +89,12 @@ server {
     error_page 504 /errors/504-error.html;
 
     location ~ /errors/.*-error.html {
-        try_files $uri $1-error.html;
+        try_files $uri;
         internal;
+    }
+
+    location = /errors/pingwin.png {
+        try_files $uri;
     }
 
     location = /geokrety.php {
